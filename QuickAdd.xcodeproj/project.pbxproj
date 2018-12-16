@@ -7,20 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B9BD342E99DC71685785B4A /* Pods_QuickAdd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E32935562F451244F590BB4 /* Pods_QuickAdd.framework */; };
 		ED93E00721258D3A00D6B6E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED93E00621258D3A00D6B6E0 /* AppDelegate.swift */; };
 		ED93E00921258D3A00D6B6E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED93E00821258D3A00D6B6E0 /* ViewController.swift */; };
 		ED93E00B21258D3B00D6B6E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED93E00A21258D3B00D6B6E0 /* Assets.xcassets */; };
 		ED93E00E21258D3B00D6B6E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED93E00C21258D3B00D6B6E0 /* Main.storyboard */; };
+		EDD958802127E66800A82A8A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9587F2127E66800A82A8A /* CalendarViewController.swift */; };
+		EDD958822127E86800A82A8A /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD958812127E86800A82A8A /* EventMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED93E00321258D3900D6B6E0 /* Copier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Copier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E32935562F451244F590BB4 /* Pods_QuickAdd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickAdd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		473F72137DEC3CC1576ACBEC /* Pods_Copier.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Copier.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87A545FAED6824FC9486226B /* Pods-QuickAdd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickAdd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickAdd/Pods-QuickAdd.debug.xcconfig"; sourceTree = "<group>"; };
+		93671A2F0ED077CD6E19F0A4 /* Pods-Copier.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Copier.release.xcconfig"; path = "Pods/Target Support Files/Pods-Copier/Pods-Copier.release.xcconfig"; sourceTree = "<group>"; };
+		9AD4352DB1C8B35B4D46ED7A /* Pods-QuickAdd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickAdd.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickAdd/Pods-QuickAdd.release.xcconfig"; sourceTree = "<group>"; };
+		ED93E00321258D3900D6B6E0 /* QuickAdd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickAdd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED93E00621258D3A00D6B6E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED93E00821258D3A00D6B6E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED93E00A21258D3B00D6B6E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED93E00D21258D3B00D6B6E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED93E00F21258D3B00D6B6E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED93E01021258D3B00D6B6E0 /* Copier.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Copier.entitlements; sourceTree = "<group>"; };
+		EDD9587F2127E66800A82A8A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		EDD958812127E86800A82A8A /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		EFBAEB2C49DCE1B6FF9F4661 /* Pods-Copier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Copier.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Copier/Pods-Copier.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,24 +39,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9BD342E99DC71685785B4A /* Pods_QuickAdd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6CBF2AC7AE6EB42D57B737E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				473F72137DEC3CC1576ACBEC /* Pods_Copier.framework */,
+				2E32935562F451244F590BB4 /* Pods_QuickAdd.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C680C54A41755810D220015F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EFBAEB2C49DCE1B6FF9F4661 /* Pods-Copier.debug.xcconfig */,
+				93671A2F0ED077CD6E19F0A4 /* Pods-Copier.release.xcconfig */,
+				87A545FAED6824FC9486226B /* Pods-QuickAdd.debug.xcconfig */,
+				9AD4352DB1C8B35B4D46ED7A /* Pods-QuickAdd.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ED93DFFA21258D3900D6B6E0 = {
 			isa = PBXGroup;
 			children = (
 				ED93E00521258D3A00D6B6E0 /* Copier */,
 				ED93E00421258D3900D6B6E0 /* Products */,
+				C680C54A41755810D220015F /* Pods */,
+				6CBF2AC7AE6EB42D57B737E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		ED93E00421258D3900D6B6E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED93E00321258D3900D6B6E0 /* Copier.app */,
+				ED93E00321258D3900D6B6E0 /* QuickAdd.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,9 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				ED93E00621258D3A00D6B6E0 /* AppDelegate.swift */,
+				EDD9587F2127E66800A82A8A /* CalendarViewController.swift */,
 				ED93E00821258D3A00D6B6E0 /* ViewController.swift */,
 				ED93E00A21258D3B00D6B6E0 /* Assets.xcassets */,
 				ED93E00C21258D3B00D6B6E0 /* Main.storyboard */,
+				EDD958812127E86800A82A8A /* EventMonitor.swift */,
 				ED93E00F21258D3B00D6B6E0 /* Info.plist */,
 				ED93E01021258D3B00D6B6E0 /* Copier.entitlements */,
 			);
@@ -66,21 +102,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ED93E00221258D3900D6B6E0 /* Copier */ = {
+		ED93E00221258D3900D6B6E0 /* QuickAdd */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED93E01321258D3B00D6B6E0 /* Build configuration list for PBXNativeTarget "Copier" */;
+			buildConfigurationList = ED93E01321258D3B00D6B6E0 /* Build configuration list for PBXNativeTarget "QuickAdd" */;
 			buildPhases = (
+				3E3CA46C9CBD8CDD64FB6BBF /* [CP] Check Pods Manifest.lock */,
 				ED93DFFF21258D3900D6B6E0 /* Sources */,
 				ED93E00021258D3900D6B6E0 /* Frameworks */,
 				ED93E00121258D3900D6B6E0 /* Resources */,
+				4C0734A7E220B33224EE44A8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Copier;
+			name = QuickAdd;
 			productName = Copier;
-			productReference = ED93E00321258D3900D6B6E0 /* Copier.app */;
+			productReference = ED93E00321258D3900D6B6E0 /* QuickAdd.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -95,10 +133,15 @@
 				TargetAttributes = {
 					ED93E00221258D3900D6B6E0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
-			buildConfigurationList = ED93DFFE21258D3900D6B6E0 /* Build configuration list for PBXProject "Copier" */;
+			buildConfigurationList = ED93DFFE21258D3900D6B6E0 /* Build configuration list for PBXProject "QuickAdd" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -111,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED93E00221258D3900D6B6E0 /* Copier */,
+				ED93E00221258D3900D6B6E0 /* QuickAdd */,
 			);
 		};
 /* End PBXProject section */
@@ -128,13 +171,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E3CA46C9CBD8CDD64FB6BBF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickAdd-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C0734A7E220B33224EE44A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuickAdd/Pods-QuickAdd-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/HotKey/HotKey.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyChrono/SwiftyChrono.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HotKey.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyChrono.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QuickAdd/Pods-QuickAdd-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ED93DFFF21258D3900D6B6E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD958802127E66800A82A8A /* CalendarViewController.swift in Sources */,
 				ED93E00921258D3A00D6B6E0 /* ViewController.swift in Sources */,
 				ED93E00721258D3A00D6B6E0 /* AppDelegate.swift in Sources */,
+				EDD958822127E86800A82A8A /* EventMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +353,7 @@
 		};
 		ED93E01421258D3B00D6B6E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87A545FAED6824FC9486226B /* Pods-QuickAdd.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Copier/Copier.entitlements;
@@ -286,6 +373,7 @@
 		};
 		ED93E01521258D3B00D6B6E0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AD4352DB1C8B35B4D46ED7A /* Pods-QuickAdd.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Copier/Copier.entitlements;
@@ -306,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED93DFFE21258D3900D6B6E0 /* Build configuration list for PBXProject "Copier" */ = {
+		ED93DFFE21258D3900D6B6E0 /* Build configuration list for PBXProject "QuickAdd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED93E01121258D3B00D6B6E0 /* Debug */,
@@ -315,7 +403,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED93E01321258D3B00D6B6E0 /* Build configuration list for PBXNativeTarget "Copier" */ = {
+		ED93E01321258D3B00D6B6E0 /* Build configuration list for PBXNativeTarget "QuickAdd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED93E01421258D3B00D6B6E0 /* Debug */,
