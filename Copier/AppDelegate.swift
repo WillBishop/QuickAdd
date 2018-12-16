@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+import HotKey
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     let menu = NSMenu()
@@ -55,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = menu
     }
     @objc func recordHotkey(){
-    
+        
     }
     
     @objc func togglePopover(_ sender: Any?) {

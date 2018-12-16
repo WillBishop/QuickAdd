@@ -36,6 +36,7 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         
     }
     func register(_ sender: Any?) {
+    
         hotKey = HotKey(keyCombo: KeyCombo(key: .c, modifiers: [.command, .shift]))
     }
     
@@ -108,6 +109,18 @@ extension CalendarViewController {
         viewcontroller.eventStore.requestAccess(to: .event, completion: { (granted, error) in
             print(granted)
         })
+        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
+        let accessEnabled = AXIsProcessTrustedWithOptions(options)
+        
+        if !accessEnabled {
+            print("Access Not Enabled")
+        }
+    
+        NSEvent.addGlobalMonitorForEvents(matching: [.keyDown]) { (event) in
+            
+            print("\(event.keyCode) with \((event.modifierFlags.contains(.command) ? "Command" : ""))")
+        }
         return viewcontroller
     }
+   
 }
