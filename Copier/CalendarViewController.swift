@@ -67,12 +67,15 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         
     }
     override func controlTextDidChange(_ obj: Notification) {
-        let inputString = input.stringValue
+        let inputString = input.stringValue.replacingOccurrences(of: "until", with: "to")
         guard let event = Chrono.casual.parse(text: inputString).first else {
             dateLabel.placeholderString = ""
             return
         }
         var eventTitle = input.stringValue.replacingOccurrences(of: event.text, with: "").condenseWhitespace()
+        if input.stringValue.contains("until"){
+            eventTitle = input.stringValue.replacingOccurrences(of: "until", with: "to").replacingOccurrences(of: event.text, with: "").condenseWhitespace()
+        }
         let start = event.start.date
         let end = event.end?.date ?? Calendar.current.date(byAdding: .hour, value: 1, to: event.start.date)
         let hours = (end?.timeIntervalSince(start) ?? 3600) / 60 / 60
@@ -97,8 +100,8 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
     
     func createEvent(){
         let chrono = Chrono()
-        guard let event = chrono.parse(text: input.stringValue).first else {return}
-        let eventTitle = input.stringValue.replacingOccurrences(of: event.text, with: "")
+        guard let event = chrono.parse(text: input.stringValue.replacingOccurrences(of: "until", with: "to")).first else {return}
+        let eventTitle = input.stringValue.replacingOccurrences(of: event.text.replacingOccurrences(of: "until", with: "to"), with: "")
         let start = event.start.date
         let end = event.end?.date ?? Calendar.current.date(byAdding: .hour, value: 1, to: event.start.date)
         self.createEvent(withTitle: eventTitle, startDate: start, endDate: end)
