@@ -13,6 +13,14 @@ import SwiftyChrono
 
 class CalendarViewController: NSViewController, NSTextFieldDelegate {
     
+    
+    @IBOutlet weak var commandToggle: NSButton!
+    @IBOutlet weak var shiftToggle: NSButton!
+    @IBOutlet weak var optionToggle: NSButton!
+    @IBOutlet weak var controlToggle: NSButton!
+    @IBOutlet weak var actionKey: NSTextField!
+    var enabledModifiers = NSEvent.ModifierFlags()
+    var enabledActionKey: Key? = nil
     private var eventStore = EKEventStore()
     private var input = NSTextField()
     private var dateLabel = NSTextField()
@@ -35,9 +43,19 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        commandToggle.state = (UserDefaults.standard.bool(forKey: "commandEnabled") ? NSControl.StateValue.on : NSControl.StateValue.off)
+        shiftToggle.state = (UserDefaults.standard.bool(forKey: "shiftEnabled") ? NSControl.StateValue.on : NSControl.StateValue.off)
+        optionToggle.state = (UserDefaults.standard.bool(forKey: "optionEnabled") ? NSControl.StateValue.on : NSControl.StateValue.off)
+        controlToggle.state = (UserDefaults.standard.bool(forKey: "controlEnabled") ? NSControl.StateValue.on : NSControl.StateValue.off)
+        self.actionKey.stringValue = UserDefaults.standard.string(forKey: "actionKey") ?? "c"
+        actionKey.delegate = self
+        actionKey.tag = 1
+        
     }
-    func register(_ sender: Any?) {
-        hotKey = HotKey(keyCombo: KeyCombo(key: .c, modifiers: [.command, .shift]))
+    func register(_ sender: Any?, keyCombo: KeyCombo) {
+    
+        hotKey = HotKey(keyCombo: keyCombo)
     }
     
     @objc func createAlert() -> Bool{
@@ -51,6 +69,7 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         input = NSTextField(frame: NSRect(x: 0, y: 25, width: 290, height: 20))
         input.placeholderString = "Movie at 7 pm on Friday"
         input.delegate = self
+        input.tag = 0
         
         dateLabel = NSTextField(frame: NSRect(x: 0, y: 0, width: 290, height: 20))
         dateLabel.isBordered = false
@@ -67,6 +86,45 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         
     }
     override func controlTextDidChange(_ obj: Notification) {
+        if let obj = obj.object as? NSTextField{
+            switch obj.tag{
+            case 0:
+                self.parseRegularInput()
+            case 1:
+                self.changeActionKey()
+            default:
+                print()
+            }
+        }
+        self.parseRegularInput()
+        
+    }
+    func changeActionKey(){
+        self.actionKey.stringValue = String(self.actionKey.stringValue.last ?? Character("c"))
+        
+        UserDefaults.standard.set(self.actionKey.stringValue, forKey: "actionKey")
+        self.enabledActionKey = Key(string: String(self.actionKey.stringValue.last ?? Character("c")))
+        if UserDefaults.standard.bool(forKey: "commandEnabled"){
+            self.enabledModifiers.insert(.command)
+        }
+        if UserDefaults.standard.bool(forKey: "shiftEnabled"){
+            self.enabledModifiers.insert(.shift)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "optionEnabled"){
+            self.enabledModifiers.insert(.option)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "controlEnabled"){
+            self.enabledModifiers.insert(.control)
+            
+        }
+        let keyCombo = KeyCombo(key: enabledActionKey ?? .c, modifiers: enabledModifiers ?? [.command, .shift])
+        self.register(self, keyCombo: keyCombo)
+
+        
+    }
+    func parseRegularInput(){
         let inputString = input.stringValue.replacingOccurrences(of: "until", with: "to")
         guard let event = Chrono.casual.parse(text: inputString).first else {
             dateLabel.placeholderString = ""
@@ -137,6 +195,35 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
             }
         }
     }
+    @IBAction func toggleModifierKey(_ sender: NSButton) {
+        var shiftEnabled = shiftToggle.state == .on
+        var controlEnabled = controlToggle.state == .on
+        var optionEnabled = optionToggle.state == .on
+        var commandEnabled = commandToggle.state == .on
+        UserDefaults.standard.set(true, forKey: "customHotkey")
+        
+        UserDefaults.standard.set(shiftEnabled, forKey: "shiftEnabled")
+        UserDefaults.standard.set(controlEnabled, forKey: "controlEnabled")
+        UserDefaults.standard.set(optionEnabled, forKey: "optionEnabled")
+        UserDefaults.standard.set(commandEnabled, forKey: "commandEnabled")
+        if UserDefaults.standard.bool(forKey: "commandEnabled"){
+            self.enabledModifiers.insert(.command)
+        }
+        if UserDefaults.standard.bool(forKey: "shiftEnabled"){
+            self.enabledModifiers.insert(.shift)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "optionEnabled"){
+            self.enabledModifiers.insert(.option)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "controlEnabled"){
+            self.enabledModifiers.insert(.control)
+            
+        }
+        let keyCombo = KeyCombo(key: enabledActionKey ?? .c, modifiers: enabledModifiers ?? [.command, .shift])
+        self.register(self, keyCombo: keyCombo)
+    }
 }
 
 extension CalendarViewController {
@@ -150,10 +237,31 @@ extension CalendarViewController {
         guard let viewcontroller = storyboard.instantiateController(withIdentifier: identifier) as? CalendarViewController else {
             fatalError("Why cant i find CalendarViewController? - Check Main.storyboard")
         }
-        viewcontroller.register(self)
+        
         viewcontroller.eventStore.requestAccess(to: .event, completion: { (granted, error) in
             print(granted)
         })
+        viewcontroller.enabledActionKey = Key(string: UserDefaults.standard.string(forKey: "actionKey") ?? "c")
+        
+        
+        if UserDefaults.standard.bool(forKey: "commandEnabled"){
+            viewcontroller.enabledModifiers.insert(.command)
+        }
+        if UserDefaults.standard.bool(forKey: "shiftEnabled"){
+            viewcontroller.enabledModifiers.insert(.shift)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "optionEnabled"){
+            viewcontroller.enabledModifiers.insert(.option)
+            
+        }
+        if UserDefaults.standard.bool(forKey: "controlEnabled"){
+            viewcontroller.enabledModifiers.insert(.control)
+            
+        }
+        let enabledActionKey = Key(string: UserDefaults.standard.string(forKey: "actionKey") ?? "c")
+        let keyCombo = KeyCombo(key: enabledActionKey ?? .c, modifiers: viewcontroller.enabledModifiers ?? [.command, .shift])
+        viewcontroller.register(self, keyCombo: keyCombo)
         return viewcontroller
     }
    

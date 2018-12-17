@@ -55,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = menu
     }
     @objc func recordHotkey(){
-        
+        self.togglePopover(self)
     }
     
     @objc func togglePopover(_ sender: Any?) {
