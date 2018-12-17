@@ -106,18 +106,26 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         self.enabledActionKey = Key(string: String(self.actionKey.stringValue.last ?? Character("c")))
         if UserDefaults.standard.bool(forKey: "commandEnabled"){
             self.enabledModifiers.insert(.command)
+        } else {
+            self.enabledModifiers.remove(.command)
         }
         if UserDefaults.standard.bool(forKey: "shiftEnabled"){
             self.enabledModifiers.insert(.shift)
             
+        } else {
+            self.enabledModifiers.remove(.shift)
         }
         if UserDefaults.standard.bool(forKey: "optionEnabled"){
             self.enabledModifiers.insert(.option)
             
+        } else {
+            self.enabledModifiers.remove(.option)
         }
         if UserDefaults.standard.bool(forKey: "controlEnabled"){
             self.enabledModifiers.insert(.control)
             
+        } else {
+            self.enabledModifiers.remove(.control)
         }
         let keyCombo = KeyCombo(key: enabledActionKey ?? .c, modifiers: enabledModifiers ?? [.command, .shift])
         self.register(self, keyCombo: keyCombo)
@@ -196,30 +204,37 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         }
     }
     @IBAction func toggleModifierKey(_ sender: NSButton) {
-        var shiftEnabled = shiftToggle.state == .on
-        var controlEnabled = controlToggle.state == .on
-        var optionEnabled = optionToggle.state == .on
-        var commandEnabled = commandToggle.state == .on
-        UserDefaults.standard.set(true, forKey: "customHotkey")
-        
+        let shiftEnabled = shiftToggle.state == .on
+        let controlEnabled = controlToggle.state == .on
+        let optionEnabled = optionToggle.state == .on
+        let commandEnabled = commandToggle.state == .on
+
         UserDefaults.standard.set(shiftEnabled, forKey: "shiftEnabled")
         UserDefaults.standard.set(controlEnabled, forKey: "controlEnabled")
         UserDefaults.standard.set(optionEnabled, forKey: "optionEnabled")
         UserDefaults.standard.set(commandEnabled, forKey: "commandEnabled")
         if UserDefaults.standard.bool(forKey: "commandEnabled"){
             self.enabledModifiers.insert(.command)
+        } else {
+            self.enabledModifiers.remove(.command)
         }
         if UserDefaults.standard.bool(forKey: "shiftEnabled"){
             self.enabledModifiers.insert(.shift)
             
+        } else {
+            self.enabledModifiers.remove(.shift)
         }
         if UserDefaults.standard.bool(forKey: "optionEnabled"){
             self.enabledModifiers.insert(.option)
             
+        } else {
+            self.enabledModifiers.remove(.option)
         }
         if UserDefaults.standard.bool(forKey: "controlEnabled"){
             self.enabledModifiers.insert(.control)
             
+        } else {
+            self.enabledModifiers.remove(.control)
         }
         let keyCombo = KeyCombo(key: enabledActionKey ?? .c, modifiers: enabledModifiers ?? [.command, .shift])
         self.register(self, keyCombo: keyCombo)
