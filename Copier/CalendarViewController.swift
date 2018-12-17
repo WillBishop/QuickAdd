@@ -15,6 +15,7 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
     
     private var eventStore = EKEventStore()
     private var input = NSTextField()
+    private var dateLabel = NSTextField()
     private var hotKey: HotKey? {
         didSet {
             guard let hotKey = hotKey else {
@@ -36,7 +37,6 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         
     }
     func register(_ sender: Any?) {
-    
         hotKey = HotKey(keyCombo: KeyCombo(key: .c, modifiers: [.command, .shift]))
     }
     
@@ -46,14 +46,55 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         alert.addButton(withTitle: "Create")
         alert.addButton(withTitle: "Cancel")
         
-        input = NSTextField(frame: NSRect(x: 0, y: 0, width: 290, height: 20))
+        let view = NSView(frame: NSRect(x: 0, y: 0, width: 290, height: 40))
+        
+        input = NSTextField(frame: NSRect(x: 0, y: 25, width: 290, height: 20))
         input.placeholderString = "Movie at 7 pm on Friday"
         input.delegate = self
-        alert.accessoryView = input
+        
+        dateLabel = NSTextField(frame: NSRect(x: 0, y: 0, width: 290, height: 20))
+        dateLabel.isBordered = false
+        dateLabel.backgroundColor = NSColor.clear
+        dateLabel.placeholderString = ""
+        dateLabel.isEditable = false
+        dateLabel.isSelectable = false
+        
+        view.addSubview(dateLabel)
+        view.addSubview(input)
+        alert.accessoryView = view
         alert.window.initialFirstResponder = input
         return alert.runModal() == .alertFirstButtonReturn
         
     }
+    override func controlTextDidChange(_ obj: Notification) {
+        let inputString = input.stringValue
+        guard let event = Chrono.casual.parse(text: inputString).first else {
+            dateLabel.placeholderString = ""
+            return
+        }
+        var eventTitle = input.stringValue.replacingOccurrences(of: event.text, with: "").condenseWhitespace()
+        let start = event.start.date
+        let end = event.end?.date ?? Calendar.current.date(byAdding: .hour, value: 1, to: event.start.date)
+        let hours = (end?.timeIntervalSince(start) ?? 3600) / 60 / 60
+        let hoursString = forTrailingZero(temp: hours)
+        let format = DateFormatter()
+        format.dateFormat = "dd/MM/yyyy h:mma"
+        var todayString = format.string(from: start) + " (\(hoursString) Hours)"
+        if Calendar.current.isDateInToday(start){
+            format.dateFormat = "h:mma"
+            todayString = "at " + format.string(from: start) + " (\(hoursString) Hours)"
+        } else if Calendar.current.isDateInTomorrow(start){
+            format.dateFormat = "h:mma"
+            todayString = "Tomorrow at " + format.string(from: start) + " (\(hoursString) Hours)"
+        }
+        
+        dateLabel.placeholderString = "\"\(eventTitle)\", \(todayString)"
+    }
+    func forTrailingZero(temp: Double) -> String {
+        var tempVar = String(format: "%g", temp)
+        return tempVar
+    }
+    
     func createEvent(){
         let chrono = Chrono()
         guard let event = chrono.parse(text: input.stringValue).first else {return}
@@ -62,6 +103,7 @@ class CalendarViewController: NSViewController, NSTextFieldDelegate {
         let end = event.end?.date ?? Calendar.current.date(byAdding: .hour, value: 1, to: event.start.date)
         self.createEvent(withTitle: eventTitle, startDate: start, endDate: end)
     }
+    
     func createEvent(withTitle eventName: String, startDate start: Date, endDate end: Date? = nil){
         
        
@@ -109,18 +151,14 @@ extension CalendarViewController {
         viewcontroller.eventStore.requestAccess(to: .event, completion: { (granted, error) in
             print(granted)
         })
-        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
-        let accessEnabled = AXIsProcessTrustedWithOptions(options)
-        
-        if !accessEnabled {
-            print("Access Not Enabled")
-        }
-    
-        NSEvent.addGlobalMonitorForEvents(matching: [.keyDown]) { (event) in
-            
-            print("\(event.keyCode) with \((event.modifierFlags.contains(.command) ? "Command" : ""))")
-        }
         return viewcontroller
     }
    
+}
+
+extension String {
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
+    }
 }

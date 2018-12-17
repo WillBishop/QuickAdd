@@ -31,6 +31,7 @@
 		ED93E01021258D3B00D6B6E0 /* Copier.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Copier.entitlements; sourceTree = "<group>"; };
 		EDD9587F2127E66800A82A8A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		EDD958812127E86800A82A8A /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		EDF7E4C021C71D3700D75DDE /* QuickAdd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickAdd.entitlements; sourceTree = "<group>"; };
 		EFBAEB2C49DCE1B6FF9F4661 /* Pods-Copier.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Copier.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Copier/Pods-Copier.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +70,7 @@
 		ED93DFFA21258D3900D6B6E0 = {
 			isa = PBXGroup;
 			children = (
+				EDF7E4C021C71D3700D75DDE /* QuickAdd.entitlements */,
 				ED93E00521258D3A00D6B6E0 /* Copier */,
 				ED93E00421258D3900D6B6E0 /* Products */,
 				C680C54A41755810D220015F /* Pods */,
@@ -135,7 +137,7 @@
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -356,6 +358,7 @@
 			baseConfigurationReference = 87A545FAED6824FC9486226B /* Pods-QuickAdd.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuickAdd.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -377,6 +380,7 @@
 			baseConfigurationReference = 9AD4352DB1C8B35B4D46ED7A /* Pods-QuickAdd.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuickAdd.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
